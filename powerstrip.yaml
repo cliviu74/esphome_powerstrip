@@ -1,0 +1,56 @@
+esphome:
+  name: powerstrip_1
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  #use_address: 192.168.10.136
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+dallas:
+  - pin: D2
+
+switch:
+  - platform: gpio
+    name: "Powerstrip Socket 1"
+    pin: 
+      number: D5
+      inverted: yes
+  - platform: gpio
+    name: "Powerstrip Socket 2"
+    pin: 
+      number: D6
+      inverted: yes
+  - platform: gpio
+    name: "Powerstrip Socket 3"
+    pin: 
+      number: D7
+      inverted: yes
+  - platform: gpio
+    name: "Powerstrip Socket 4"
+    pin: 
+      number: D1
+      inverted: yes
+
+sensor:
+  - platform: dallas
+    id: powerstrip_temperature_1
+    address: 0xC40415A444EEFF28
+    name: "Powerstrip Temperature 1"
+  - platform: dallas
+    id: powerstrip_temperature_2
+    address: 0x390415A442D5FF28
+    name: "Powerstrip Temperature 2"
+  - platform: wifi_signal
+    name: "PowerStrip WiFi Signal"
+    id: powerstrip_wifi_signal
+    update_interval: 60s
